@@ -5,10 +5,11 @@ import express from 'express';
 import * as classes from './';
 import * as classId from './class';
 import * as gradebook from './gradebook';
+import {checkPass} from "../../helpers";
 
 const route = express.Router();
 
-route.get('/', classes.get);
+route.get('/', checkPass(), classes.get);
 route.post('/', classes.post);
 
 route.get('/:classId', classId.get);

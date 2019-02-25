@@ -4,6 +4,10 @@ import express from 'express';
 // Routes
 import * as domains from './domains';
 
+// Instruments
+import { loggerDevelop } from './helpers';
+
+
 const app = express();
 
 app.use(
@@ -11,6 +15,7 @@ app.use(
         limit: '10kb',
     }),
 );
+
 
 app.use('/api/teachers', domains.teachers);
 app.use('/api/pupils', domains.pupils);

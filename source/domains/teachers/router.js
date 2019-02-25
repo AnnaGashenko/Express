@@ -7,11 +7,11 @@ import * as subjects from './subjects';
 
 // Instruments
 import createTeacher from './_schemas/createTeacher';
-import { validator, limiter } from '../../helpers';
+import { validator, limiter, checkPass } from '../../helpers';
 
 const route = express.Router();
 
-route.get('/', teachers.get);
+route.get('/', checkPass(), teachers.get);
 route.post('/', [ limiter(1000, 60 * 1000), validator(createTeacher) ], teachers.post);
 
 route.get('/:teacherId/subjects', subjects.get);
