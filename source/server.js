@@ -5,7 +5,7 @@ import express from 'express';
 import * as domains from './domains';
 
 // Instruments
-import { devLogger, requireJsonContent } from './helpers';
+import { devLogger, errLogger, requireJsonContent } from './helpers';
 
 const app = express();
 
@@ -32,5 +32,13 @@ app.use('/api/pupils', domains.pupils);
 app.use('/api/parents', domains.parents);
 app.use('/api/classes', domains.classes);
 app.use('/api/subjects', domains.subjects);
+
+if (process.env.NODE_ENV !== 'test') {
+    app.use((err, req, res, next) => {
+        const statusCode = err.statusCode ? err.statusCode : 500;
+        res.status(statusCode).json({ message: err.message });
+        errLogger.log('error', err.message);
+    });
+}
 
 export { app };
