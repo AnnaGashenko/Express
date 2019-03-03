@@ -7,44 +7,16 @@ const debug = dg('router:auth:login');
 export const post = (req, res) => {
     debug(`${req.method} — ${req.originalUrl}`);
 
-    const users = [
-        {
-            uid: '987654',
-            email: 'amRvZUBlbWFpbC5jb20=',
-            password: 'MTIzNDU2'
-        },
-        {
-            uid: '987655',
-            email: 'amFubmdhc2hAZ21haWwuY29t',
-            password: 'SGVsbG8kRnJvbUomV1Q='
-        }
-    ];
-
     const data = req.body;
-    const userData = users.filter(function (user) {
-        const { email, password } = data;
-        const {
-            email: userEmail,
-            password: userPassword
-        } = user;
 
-        if (email && userEmail && email === userEmail && password && userPassword && password === userPassword) {
-            return true;
-        }
-        return false;
-    });
+    const email = Buffer.from(data.email, 'base64').toString('utf-8');
+    const password = Buffer.from(data.password, 'base64').toString('utf-8');
 
     try {
-        if(userData.length) {
-            const passToken = 'pa$$w0rd';
-            const token = jwt.sign({ uid: userData.uid }, passToken);
-            res.set('X-Token', token);
-            res.status(200).json(userData);
-        } else {
-            res.status(401).json({ message: 'user or email are not valid' });
-        }
+        const token = jwt.sign({ email: email }, 'pa$$w0rd');
+        res.set('X-Token', token);
+        res.status(200).json('OK');
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
-
 };

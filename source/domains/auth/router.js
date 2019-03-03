@@ -12,6 +12,6 @@ const route = express.Router();
 
 route.post('/', auth.post);
 
-route.post('/login', [authenticate], login.post);
+route.post('/login', login.post);
 
 export { route as auth };

@@ -9,7 +9,6 @@ export const authenticate = (req, res, next) => {
 
     try {
         const data = jwt.verify(authorization, passToken);
-        console.log('data', data);
         next();
     } catch ({ message }) {
         res.status(401).json({ message: 'authentication credentials are not valid' });
