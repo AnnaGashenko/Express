@@ -1,13 +1,18 @@
-import { getPassword } from './getPassword';
+// Core
+import jwt from 'jsonwebtoken';
 
-const password = getPassword();
+const passToken = 'pa$$w0rd';
 
 export const authenticate = (req, res, next) => {
+
     const { authorization } = req.headers;
 
-    if (authorization === password) {
+    try {
+        const data = jwt.verify(authorization, passToken);
+        console.log('data', data);
         next();
-    } else {
+    } catch ({ message }) {
         res.status(401).json({ message: 'authentication credentials are not valid' });
     }
+
 };
