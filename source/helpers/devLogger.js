@@ -10,3 +10,15 @@ export const devLogger = createLogger({
     format:     combine(label({ label: 'server' }), timestamp(), serverFormat),
     transports: [ new transports.Console() ],
 });
+
+export const errLogger = createLogger({
+    level: 'debug',
+    format: format.simple(),
+    defaultMeta: { service: 'server' },
+    transports: [
+        new transports.File({
+            filename: '../logs/error.log',
+            level: 'error'
+        })
+    ]
+});

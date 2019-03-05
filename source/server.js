@@ -5,7 +5,7 @@ import express from 'express';
 import * as domains from './domains';
 
 // Instruments
-import { devLogger, requireJsonContent } from './helpers';
+import { devLogger, errLogger, requireJsonContent } from './helpers';
 
 const app = express();
 
@@ -24,6 +24,12 @@ if (process.env.NODE_ENV === 'development') {
 
         devLogger.debug(`${req.method}\n${body}`);
         next();
+    });
+}
+
+if (process.env.NODE_ENV !== 'test') {
+    app.use((err, req, res, next) => {
+        res.status(500).json({ message: err.message });
     });
 }
 
