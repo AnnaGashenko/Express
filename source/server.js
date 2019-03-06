@@ -15,7 +15,7 @@ app.use(
     }),
 );
 
-app.use(requireJsonContent());
+app.use(requireJsonContent);
 
 if (process.env.NODE_ENV === 'development') {
     app.use((req, res, next) => {
@@ -27,16 +27,18 @@ if (process.env.NODE_ENV === 'development') {
     });
 }
 
-if (process.env.NODE_ENV !== 'test') {
-    app.use((err, req, res, next) => {
-        res.status(500).json({ message: err.message });
-    });
-}
-
 app.use('/api/teachers', domains.teachers);
 app.use('/api/pupils', domains.pupils);
 app.use('/api/parents', domains.parents);
 app.use('/api/classes', domains.classes);
 app.use('/api/subjects', domains.subjects);
+
+if (process.env.NODE_ENV !== 'test') {
+    app.use((err, req, res, next) => {
+        const statusCode = err.statusCode ? err.statusCode : 500;
+        res.status(statusCode).json({ message: err.message });
+        errLogger.log('error', err.message);
+    });
+}
 
 export { app };

@@ -1,10 +1,9 @@
 import { getPassword } from './getPassword';
 
+const password = getPassword();
+
 export const authenticate = (req, res, next) => {
-    // получаем заголовки
     const { authorization } = req.headers;
-    // валидируем пароль
-    const password = getPassword();
 
     if (authorization === password) {
         next();
