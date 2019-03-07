@@ -14,6 +14,7 @@ import {
     requireJsonContent,
     getPassword,
     NotFoundError,
+    sessionStore
 } from './helpers';
 
 const app = express();
@@ -28,6 +29,7 @@ const sessionOptions = {
         httpOnly: true,
         maxAge:   15 * 60 * 1000,
     },
+    store: new sessionStore ()
 };
 
 app.use(
