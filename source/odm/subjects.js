@@ -6,8 +6,7 @@ const schema = new mongoose.Schema({
         type: String
     },
     title: {
-        type: String,
-        index: 'text'
+        type: String
     },
     image: {
         type: Buffer
@@ -16,17 +15,18 @@ const schema = new mongoose.Schema({
         {
             season: {
                 type: mongoose.Schema.Types.ObjectId
-            }, // ObjectId
+            },
         }
     ],
     description: {
-        type: String,
-        index: 'text'
+        type: String
     },
     created: {
         type: Date
     }
 });
+
+schema.index({title: 'text', description: 'text'});
 
 // Collection
 export const subjects = mongoose.model('subjects', schema);

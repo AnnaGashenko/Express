@@ -10,8 +10,7 @@ const schema = new mongoose.Schema({
         index: true
     }, // Number
     title: {
-        type: String,
-        index: 'text'
+        type: String
     },
     image: {
         type: Buffer
@@ -31,13 +30,14 @@ const schema = new mongoose.Schema({
         }
     ],
     description: {
-        type: String,
-        index: 'text'
+        type: String
     },
     created: {
         type: Date
     }
 });
+
+schema.index({title: 'text', description: 'text'});
 
 // Collection
 export const classes = mongoose.model('classes', schema);

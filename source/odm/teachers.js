@@ -76,5 +76,7 @@ const schema = new mongoose.Schema({
     }
 });
 
+schema.index({'name.first': 1, 'name.last': 1});
+
 // Collection
 export const teachers = mongoose.model('teachers', schema);
