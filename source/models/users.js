@@ -13,7 +13,7 @@ export class Users {
         const { email, password } = this.data;
         const hashedPassword = await bcrypt.hash(password, 11);
 
-        await users.create({ email, password: hashedPassword });
+        await users.create({ email, password: hashedPassword }); // users модель у которой есть метод create
 
         return true;
     }
