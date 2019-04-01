@@ -1,83 +1,83 @@
 import mongoose from 'mongoose';
 
 // Document shape
-const schema = new mongoose.Schema({
-    hash: {
-        type: String
-    },
-    name: {
-        first: {
+const schema = new mongoose.Schema(
+    {
+        hash: {
             type: String
         },
-        last: {
-            type: String
-        }
-    },
-    image: {
-        type: Buffer
-    },
-    dateOfBirth: {
-        type: Date
-    }, // Date
-    emails: [
-        {
-            email: {
-                type: String,
-                unique: true
-            },
-            primary: {
-                type: Boolean
-            }
-        }
-    ],
-    phones: [
-        {
-            phone: {
+        name: {
+            first: {
                 type: String
             },
-            primary: {
-                type: Boolean
+            last: {
+                type: String
             }
-        }
-    ],
-    sex: {
-        type: String,
-        enum: ["male", "female"]
-    },
-    social: {
-        facebook: {
-            type: String
         },
-        linkedIn: {
-            type: String
+        image: {
+            type: Buffer
         },
-        skype: {
-            type: String
-        },
-        telegram: {
-            type: String
-        }
-    },
-    class: {
-        type: mongoose.Schema.Types.ObjectId
-    },
-    parents: [
-        {
-            parent: {
-                type: mongoose.Schema.Types.ObjectId
+        dateOfBirth: {
+            type: Date
+        }, // Date
+        emails: [
+            {
+                email: {
+                    type: String,
+                    unique: true
+                },
+                primary: {
+                    type: Boolean
+                }
             }
-        }
-    ],
-    description: {
-        type: String
+        ],
+        phones: [
+            {
+                phone: {
+                    type: String
+                },
+                primary: {
+                    type: Boolean
+                }
+            }
+        ],
+        sex: {
+            type: String,
+            enum: ["male", "female"]
+        },
+        social: {
+            facebook: {
+                type: String
+            },
+            linkedIn: {
+                type: String
+            },
+            skype: {
+                type: String
+            },
+            telegram: {
+                type: String
+            }
+        },
+        class: {
+            type: mongoose.Schema.Types.ObjectId
+        },
+        parents: [
+            {
+                parent: {
+                    type: mongoose.Schema.Types.ObjectId
+                }
+            }
+        ],
+        description: {
+            type: String
+        },
+        started: {
+            type: Date
+        } // Date
     },
-    started: {
-        type: Date
-    }, // Date
-    created: {
-        type: Date
-    }
-});
+    { timestamps: { createdAt: 'created', updatedAt: 'modified' } }
+);
 
 schema.index({'name.first': 1, 'name.last': 1});
 
