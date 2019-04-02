@@ -3,83 +3,53 @@ import mongoose from 'mongoose';
 // Document shape
 const schema = new mongoose.Schema(
     {
-        hash: {
-            type: String
-        },
+        hash: String,
         name: {
-            first: {
-                type: String
-            },
-            last: {
-                type: String
-            }
+            first: String,
+            last:  String,
         },
-        image: {
-            type: Buffer
-        },
-        dateOfBirth: {
-            type: Date
-        }, // Date
-        emails: [
+        image:       String,
+        dateOfBirth: Date,
+        emails:      [
             {
                 email: {
-                    type: String,
-                    unique: true
+                    type:   String,
+                    unique: true,
                 },
-                primary: {
-                    type: Boolean
-                }
-            }
+                primary: Boolean,
+            },
         ],
         phones: [
             {
-                phone: {
-                    type: String
-                },
-                primary: {
-                    type: Boolean
-                }
-            }
+                phone:   String,
+                primary: Boolean,
+            },
         ],
-        sex: {
-            type: String,
-            enum: ["male", "female"]
-        },
+        sex:    String,
         social: {
-            facebook: {
-                type: String
-            },
-            linkedIn: {
-                type: String
-            },
-            skype: {
-                type: String
-            },
-            telegram: {
-                type: String
-            }
+            facebook: String,
+            linkedIn: String,
+            skype:    String,
+            telegram: String,
         },
-        class: {
-            type: mongoose.Schema.Types.ObjectId
-        },
+        class:   mongoose.SchemaTypes.ObjectId,
         parents: [
             {
-                parent: {
-                    type: mongoose.Schema.Types.ObjectId
-                }
-            }
+                parent: mongoose.SchemaTypes.ObjectId,
+            },
         ],
-        description: {
-            type: String
-        },
-        started: {
-            type: Date
-        } // Date
+        description: String,
+        started:     Date,
     },
-    { timestamps: { createdAt: 'created', updatedAt: 'modified' } }
+    {
+        timestamps: {
+            createdAt: 'created',
+            updatedAt: 'modified',
+        },
+    },
 );
 
-schema.index({'name.first': 1, 'name.last': 1});
+schema.index({ 'name.first': 1, 'name.last': 1 });
 
 // Collection
 export const persons = mongoose.model('persons', schema);

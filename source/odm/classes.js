@@ -3,45 +3,34 @@ import mongoose from 'mongoose';
 // Document shape
 const schema = new mongoose.Schema(
     {
-        hash: {
-            type: String
-        },
+        hash:  String,
         order: {
-            type: Number,
-            index: true
-        }, // Number
-        title: {
-            type: String
+            type:  Number,
+            index: true,
         },
-        image: {
-            type: Buffer
+        title: String,
+        image: String,
+        room:  {
+            type:  Number,
+            index: true,
         },
-        room: {
-            type: Number,
-            index: true
-        },
-        floor: {
-            type: Number
-        },
+        floor:      Number,
         gradebooks: [
             {
-                gradebook: {
-                    type: mongoose.Schema.Types.ObjectId
-                }
-            }
+                gradebook: mongoose.SchemaTypes.ObjectId,
+            },
         ],
-        description: {
-            type: String
-        },
-        created: {
-            type: Date
-        }
+        description: String,
     },
-    { timestamps: { createdAt: 'created', updatedAt: 'modified' } }
-
+    {
+        timestamps: {
+            createdAt: 'created',
+            updatedAt: 'modified',
+        },
+    },
 );
 
-schema.index({title: 'text', description: 'text'});
+schema.index({ title: 'text', description: 'text' });
 
 // Collection
 export const classes = mongoose.model('classes', schema);

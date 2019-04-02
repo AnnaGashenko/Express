@@ -3,30 +3,25 @@ import mongoose from 'mongoose';
 // Document shape
 const schema = new mongoose.Schema(
     {
-        hash: {
-            type: String
-        },
-        title: {
-            type: String
-        },
-        image: {
-            type: Buffer
-        },
+        hash:    String,
+        title:   String,
+        image:   String,
         seasons: [
             {
-                season: {
-                    type: mongoose.Schema.Types.ObjectId
-                },
-            }
+                season: mongoose.SchemaTypes.ObjectId,
+            },
         ],
-        description: {
-            type: String
-        }
+        description: String,
     },
-    { timestamps: { createdAt: 'created', updatedAt: 'modified' } }
+    {
+        timestamps: {
+            createdAt: 'created',
+            updatedAt: 'modified',
+        },
+    },
 );
 
-schema.index({title: 'text', description: 'text'});
+schema.index({ title: 'text', description: 'text' });
 
 // Collection
 export const subjects = mongoose.model('subjects', schema);

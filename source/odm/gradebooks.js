@@ -3,48 +3,34 @@ import mongoose from 'mongoose';
 // Document shape
 const schema = new mongoose.Schema(
     {
-        hash: {
-            type: String
-        },
-        image: {
-            type: String
-        },
-        year: {
-            type: Number,
-            index: true
+        hash:  String,
+        image: String,
+        year:  {
+            type:  Number,
+            index: true,
         },
         class: {
-            type: Number,
-            index: true
+            type:  String,
+            index: true,
         },
         records: [
             {
-                personHash: {
-                    type: mongoose.Schema.Types.ObjectId
-                }, // ObjectId
-                teacherHash: {
-                    type: mongoose.Schema.Types.ObjectId
-                }, // ObjectId
-                subjectHash: {
-                    type: mongoose.Schema.Types.ObjectId
-                }, // ObjectId
-                seasonHash: {
-                    type: mongoose.Schema.Types.ObjectId
-                }, // ObjectId
-                lessonHash: {
-                    type: mongoose.Schema.Types.ObjectId
-                }, // ObjectId
-                mark: {
-                    type: Number
-                } // Number
-            }
+                personHash:  mongoose.SchemaTypes.ObjectId,
+                teacherHash: mongoose.SchemaTypes.ObjectId,
+                subjectHash: mongoose.SchemaTypes.ObjectId,
+                seasonHash:  mongoose.SchemaTypes.ObjectId,
+                lessonHash:  mongoose.SchemaTypes.ObjectId,
+                mark:        Number,
+            },
         ],
-        description: {
-            type: String
-        }
+        description: String,
     },
-    { timestamps: { createdAt: 'created', updatedAt: 'modified' } }
-
+    {
+        timestamps: {
+            createdAt: 'created',
+            updatedAt: 'modified',
+        },
+    },
 );
 
 // Collection

@@ -3,28 +3,25 @@ import mongoose from 'mongoose';
 // Document shape
 const schema = new mongoose.Schema(
     {
-        hash: {
-            type: String
-        },
-        order: {
-            type: Number
-        },
+        hash:  String,
+        order: Number,
         title: {
-            type: String,
-            index: true
+            type:  String,
+            index: true,
         },
-        image: {
-            type: Buffer
-        },
-        subject: {
-            type: mongoose.Schema.Types.ObjectId
-        }, // ObjectId
-        season: {
-            type: mongoose.Schema.Types.ObjectId
-        } // ObjectId
+        image:   String,
+        subject: mongoose.SchemaTypes.ObjectId,
+        season:  mongoose.SchemaTypes.ObjectId,
     },
-    { timestamps: { createdAt: 'created', updatedAt: 'modified' } }
+    {
+        timestamps: {
+            createdAt: 'created',
+            updatedAt: 'modified',
+        },
+    },
 );
+
+schema.index({ 'name.first': 1, 'name.last': 1 });
 
 // Collection
 export const lessons = mongoose.model('lessons', schema);

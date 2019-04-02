@@ -12,7 +12,12 @@ const schema = new mongoose.Schema(
             type: String,
         },
     },
-    { timestamps: { createdAt: 'created', updatedAt: 'modified' } }
+    {
+        timestamps: {
+            createdAt: 'created',
+            updatedAt: 'modified',
+        },
+    },
 );
 
 // Collection
