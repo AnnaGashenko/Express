@@ -16,6 +16,6 @@ export default {
             required: [ 'first' ],
         },
     },
-    required:             [ 'name' ],
+    required: [ 'name' ],
     additionalProperties: false,
 };

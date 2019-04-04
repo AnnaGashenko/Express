@@ -1,6 +1,9 @@
 // Core
 import dg from 'debug';
 
+// Instruments
+import {  } from '../../controllers';
+
 const debug = dg('router:subjects:subject');
 
 export const get = (req, res) => {

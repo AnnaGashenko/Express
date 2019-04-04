@@ -19,12 +19,19 @@ export const get = async (req, res) => {
     }
 };
 
+/**
+ * Запрос приходит роут, роут вызывает контроллер, в который мы передаем данные
+ * метод котроллера создает модель и вызывает метод модели
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
 export const post = async (req, res) => {
     debug(`${req.method} — ${req.originalUrl}`);
 
     try {
-        const teachers = new Teachers(req.body);
-        const data = await teachers.create();
+        const teachers = new Teachers(req.body); // передаем в контроллер body
+        const data = await teachers.create(); // вызываем метод котроллера create
 
         res.status(200).json({ data });
     } catch (error) {

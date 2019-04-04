@@ -14,6 +14,11 @@ export class Teachers {
         return data;
     }
 
+    /**
+     * добаляем внутренний идентификатор к-й будет работать на ряду с id Mongo
+     * @returns {Promise<void>}
+     */
+
     async create() {
         const teacher = {
             hash: v4(),
@@ -22,5 +27,13 @@ export class Teachers {
         const data = await teachers.create(teacher);
 
         return data;
+    }
+
+    async update() {
+        teachers.findOneAndUpdate(
+            { _id: id },
+            this.data,
+            { new: true }
+        );
     }
 }

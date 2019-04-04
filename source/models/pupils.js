@@ -1,25 +1,25 @@
 import v4 from 'uuid/v4';
 
 // ODM
-import { subjects } from '../odm';
+import { pupils } from '../odm';
 
-export class Subjects {
+export class Pupils {
     constructor(data) {
         this.data = data;
     }
 
     async find() {
-        const data = await subjects.find();
+        const data = await pupils.find();
 
         return data;
     }
 
     async create() {
-        const subjects = {
+        const pupils = {
             hash: v4(),
             ...this.data,
         };
-        const data = await subjects.create(subjects);
+        const data = await pupils.create(pupils);
 
         return data;
     }
