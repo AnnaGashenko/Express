@@ -1,6 +1,6 @@
 export { Users } from './users';
 export { Teachers } from './teachers';
 export { Classes } from './classes';
-export { Subjects } from './subjects';
-export { Parents } from './parents';
+export { Gradebooks } from './gradebooks';
 export { Pupils } from './pupils';
+export { Subjects } from './subjects';

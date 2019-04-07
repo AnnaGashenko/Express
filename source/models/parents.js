@@ -9,24 +9,8 @@ export class Parents {
         this.data = data;
     }
 
-    async find() {
-        const data = await parents.find();
-
-        return data;
-    }
-
-    async create() {
-        const pupil = {
-            hash: v4(),
-            ...this.data,
-        };
-        const data = await parents.create(pupil);
-
-        return data;
-    }
-
     async findAllPupils() {
-        const data = await parents.find();
+        const data = await parents.find().lean();
 
         return data;
     }
@@ -40,6 +24,4 @@ export class Parents {
 
         return data;
     }
-
-
 }

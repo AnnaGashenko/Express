@@ -9,19 +9,18 @@ export class Pupils {
     }
 
     async find() {
-        const data = await pupils.find();
+        const data = await pupils.find().lean();
 
         return data;
     }
 
     async create() {
-        const pupils = {
+        const pupil = {
             hash: v4(),
             ...this.data,
         };
-        const data = await pupils.create(pupils);
+        const data = await pupils.create(pupil);
 
         return data;
     }
-
 }

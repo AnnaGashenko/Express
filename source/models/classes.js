@@ -8,53 +8,43 @@ export class Classes {
         this.data = data;
     }
 
-    async findOneClass() {
-        const data = await classes.find({ id: this.data.id });
-
-        return data;
-    }
-
-    async findAllClasses() {
-        const data = await classes.find();
-
-        return data;
-    }
-
     async create() {
-        const classes = {
+        const userClass = {
             hash: v4(),
             ...this.data,
         };
-        const data = await classes.create(classes);
+        const data = await classes.create(userClass);
 
         return data;
     }
 
-    async createByClassId() {
-        const classes = {
-            hash: v4(),
-            ...this.data,
-        };
-        const data = await classes.create(classes);
+    async find() {
+        const data = await classes.find().lean();
 
         return data;
     }
 
-    async update() {
-        const data = await classes.findOneAndUpdate(
-            { _id: this.data.id },
-            this.data.payload,
-            { new: true }
+    async findById() {
+        const { id } = this.data;
+        const data = await classes
+            .findById(id)
+            .populate({ path: 'gradebooks.gradebook', select: '-_id -__v' })
+            .select('-_id -__v')
+            .lean();
+
+        return data;
+    }
+
+    async assignGradebook() {
+        const { id, gradebook } = this.data;
+        const data = await classes.findByIdAndUpdate(
+            id,
+            {
+                $addToSet: { gradebooks: { gradebook } },
+            },
+            { new: true },
         );
 
         return data;
     }
-
-    async delete() {
-
-        const data = await classes.findOneAndDelete({ _id: this.data.id });
-
-        return data;
-    }
-
 }

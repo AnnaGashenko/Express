@@ -10,7 +10,7 @@ export const get = async (req, res) => {
     debug(`${req.method} — ${req.originalUrl}`);
 
     try {
-        const pupils = new Pupils();
+        const pupils = new Pupils(req.body);
         const data = await pupils.find();
 
         res.status(200).json({ data });
@@ -23,7 +23,7 @@ export const post = async (req, res) => {
     debug(`${req.method} — ${req.originalUrl}`);
 
     try {
-        const pupils = new Pupils();
+        const pupils = new Pupils(req.body);
         const data = await pupils.create();
 
         res.status(200).json({ data });

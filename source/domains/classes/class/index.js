@@ -6,12 +6,13 @@ import { Classes } from '../../../controllers';
 
 const debug = dg('router:classes:class');
 
-export const get = (req, res) => {
+export const get = async (req, res) => {
     debug(`${req.method} — ${req.originalUrl}`);
 
     try {
-        const classes = new Classes(req.params.id);
-        const data = classes.findOneClass();
+        const { classId: id } = req.params;
+        const classes = new Classes({ id });
+        const data = await classes.findById();
 
         res.status(200).json({ data });
     } catch (error) {
@@ -19,16 +20,14 @@ export const get = (req, res) => {
     }
 };
 
-export const post = (req, res) => {
+export const post = async (req, res) => {
     debug(`${req.method} — ${req.originalUrl}`);
 
     try {
-        const params = {
-            id : req.params.id,
-            payload : req.body
-        };
-        const classes = new Classes(params);
-        const data = classes.createByClassId();
+        const { classId: id } = req.params;
+        const { gradebook } = req.body;
+        const classes = new Classes({ id, gradebook });
+        const data = await classes.createByClassId();
 
         res.status(200).json({ data });
     } catch (error) {
@@ -40,12 +39,7 @@ export const put = (req, res) => {
     debug(`${req.method} — ${req.originalUrl}`);
 
     try {
-        const params = {
-            id : req.params.id,
-            payload : req.body
-        };
-        const classes = new Classes(params);
-        const data = classes.update();
+        const data = {};
 
         res.status(200).json({ data });
     } catch (error) {
@@ -57,9 +51,6 @@ export const remove = (req, res) => {
     debug(`${req.method} — ${req.originalUrl}`);
 
     try {
-        const classes = new Classes(req.params.id);
-        classes.delete();
-
         res.sendStatus(204);
     } catch (error) {
         res.status(400).json({ message: error.message });

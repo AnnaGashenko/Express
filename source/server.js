@@ -17,7 +17,7 @@ import {
     Storage
 } from './helpers';
 
-// DB
+// Initialize DB connection
 import './db';
 
 const app = express();
@@ -34,6 +34,16 @@ const sessionOptions = {
     },
     store: new Storage ()
 };
+
+// change cookie max age for development
+if (process.env.NODE_ENV === 'development') {
+    sessionOptions.cookie.maxAge = 8 * 60 * 60 * 1000; // 8 hours
+}
+
+// secure cookie for production
+if (process.env.NODE_ENV === 'production') {
+    sessionOptions.cookie.secure = true;
+}
 
 app.use(
     express.json({

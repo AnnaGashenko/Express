@@ -3,21 +3,34 @@ import mongoose from 'mongoose';
 // Document shape
 const schema = new mongoose.Schema(
     {
-        hash:  String,
-        order: {
-            type:  Number,
-            index: true,
+        hash: {
+            type:     String,
+            required: true,
+            unique:   true,
         },
-        title: String,
+        order: {
+            type:     Number,
+            required: true,
+            index:    true,
+        },
+        title: {
+            type:     String,
+            required: true,
+            unique:   true,
+        },
         image: String,
         room:  {
-            type:  Number,
-            index: true,
+            type:     Number,
+            required: true,
+            index:    true,
         },
         floor:      Number,
         gradebooks: [
             {
-                gradebook: mongoose.SchemaTypes.ObjectId,
+                gradebook: {
+                    type: mongoose.SchemaTypes.ObjectId,
+                    ref:  'gradebooks',
+                },
             },
         ],
         description: String,

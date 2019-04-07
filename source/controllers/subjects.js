@@ -3,22 +3,30 @@ import { Subjects as SubjectsModel } from '../models';
 export class Subjects {
     constructor(data) {
         this.models = {
-            subjects: new SubjectsModel(data), // создаем экземпляр класса модели и пробрасываем данные в модель
+            subjects: new SubjectsModel(data),
         };
     }
 
-    async find() {
-        const data = await this.models.subjects.find();
+    async findSeason() {
+        const data = await this.models.subjects.findSeason();
 
         return data;
     }
 
-    /**
-     * добавление нового teacher в БД
-     * @returns {Promise<*>}
-     */
-    async create() {
-        const data = await this.models.subjects.create();
+    async createSeason() {
+        const data = await this.models.subjects.createSeason();
+
+        return data;
+    }
+
+    async findLesson() {
+        const data = await this.models.subjects.findLesson();
+
+        return data;
+    }
+
+    async createLesson() {
+        const data = await this.models.subjects.createLesson();
 
         return data;
     }

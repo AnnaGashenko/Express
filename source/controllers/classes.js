@@ -3,46 +3,31 @@ import { Classes as ClassesModel } from '../models';
 export class Classes {
     constructor(data) {
         this.models = {
-            classes: new ClassesModel(data), // создаем экземпляр класса модели и пробрасываем данные в модель
+            classes: new ClassesModel(data),
         };
     }
 
-    async findAllClasses() {
-        const data = await this.models.сlasses.findAllClasses();
-
-        return data;
-    }
-
-    async findOneClass() {
-        const data = await this.models.сlasses.findOneClass();
-
-        return data;
-    }
-
-
     async create() {
-        const data = await this.models.сlasses.create();
+        const data = await this.models.classes.create();
 
         return data;
     }
 
-    async createByClassId() {
-        const data = await this.models.сlasses.createByClassId();
+    async find() {
+        const data = await this.models.classes.find();
 
         return data;
     }
 
-
-    async update() {
-        const data = await this.models.сlasses.update();
-
-        return data;
-    }
-
-    async delete() {
-        const data = await this.models.сlasses.delete();
+    async findById() {
+        const data = await this.models.classes.findById();
 
         return data;
     }
 
+    async assignGradebook() {
+        const data = await this.models.classes.assignGradebook();
+
+        return data;
+    }
 }

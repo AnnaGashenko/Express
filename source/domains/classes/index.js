@@ -11,7 +11,7 @@ export const get = async (req, res) => {
 
     try {
         const classes = new Classes();
-        const data = await classes.findAllClasses();
+        const data = await classes.find();
 
         res.status(200).json({ data });
     } catch (error) {
@@ -23,7 +23,7 @@ export const post = async (req, res) => {
     debug(`${req.method} — ${req.originalUrl}`);
 
     try {
-        const classes = new Classes(req.body); // передаем в контроллер body
+        const classes = new Classes(req.body);
         const data = await classes.create();
 
         res.status(200).json({ data });
