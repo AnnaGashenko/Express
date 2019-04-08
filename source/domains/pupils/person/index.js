@@ -1,7 +1,34 @@
 // Core
 import dg from 'debug';
+import { Persons } from "../../../controllers";
 
 const debug = dg('router:pupils:person');
+
+export const getPersons = async (req, res) => {
+    debug(`${req.method} — ${req.originalUrl}`);
+
+    try {
+        const persons = new Persons();
+        const data = await persons.findPerson();
+
+        res.status(200).json({ data });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
+export const createPersons = async (req, res) => {
+    debug(`${req.method} — ${req.originalUrl}`);
+
+    try {
+        const persons = new Persons(req.body);
+        const data = await persons.createPerson();
+
+        res.status(200).json({ data });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
 
 export const get = (req, res) => {
     debug(`${req.method} — ${req.originalUrl}`);

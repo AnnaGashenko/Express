@@ -2,9 +2,35 @@
 import dg from 'debug';
 
 // Instruments
-import {  } from '../../controllers';
+import { Subjects } from '../../controllers';
 
 const debug = dg('router:subjects:subject');
+
+export const getSubjects = async (req, res) => {
+    debug(`${req.method} — ${req.originalUrl}`);
+
+    try {
+        const subjects = new Subjects();
+        const data = await subjects.find();
+
+        res.status(200).json({ data });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
+export const createSubject = async (req, res) => {
+    debug(`${req.method} — ${req.originalUrl}`);
+
+    try {
+        const subjects = new Subjects(req.body);
+        const data = await subjects.create();
+
+        res.status(200).json({ data });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
 
 export const get = (req, res) => {
     debug(`${req.method} — ${req.originalUrl}`);

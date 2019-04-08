@@ -9,7 +9,10 @@ export class Teachers {
     }
 
     async find() {
-        const data = await teachers.find().lean();
+        const data = await teachers
+            .find()
+            .populate({ path: 'subjects.subjects', select: '-_id -__v' })
+            .lean();
 
         return data;
     }

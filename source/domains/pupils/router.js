@@ -10,8 +10,11 @@ import { authenticate } from '../../helpers';
 
 const route = express.Router();
 
-route.get('/', [ authenticate ], pupils.get);
-route.post('/', [ authenticate ], pupils.post);
+route.get('/', person.getPersons);
+route.post('/', [ authenticate ], person.createPersons)
+
+route.get('/', [ authenticate ], pupils.getPupils);
+route.post('/', [ authenticate ], pupils.createPupils);
 
 route.get('/:personId', [ authenticate ], person.get);
 route.post('/:personId', [ authenticate ], person.post);

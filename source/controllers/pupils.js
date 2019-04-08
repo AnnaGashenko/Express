@@ -7,14 +7,27 @@ export class Pupils {
         };
     }
 
-    async find() {
-        const data = await this.models.pupils.find();
+    async findPupils() {
+        const data = await this.models.pupils.findPupils();
 
         return data;
     }
 
-    async create() {
-        const data = await this.models.pupils.create();
+    async createPupils() {
+        const data = await this.models.pupils.createPupils();
+
+        return data;
+    }
+
+
+    async findPerson() {
+        const data = await this.models.pupils.findPerson();
+
+        return data;
+    }
+
+    async createPerson() {
+        const data = await this.models.pupils.createPerson();
 
         return data;
     }

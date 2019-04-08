@@ -19,7 +19,16 @@ export class Gradebooks {
     }
 
     async find() {
-        const data = await gradebooks.find().lean();
+
+        const data = await gradebooks
+            .findById(id)
+            .populate({ path: 'records.personHash', select: '-_id -__v' })
+            .populate({ path: 'records.teacherHash', select: '-_id -__v' })
+            .populate({ path: 'records.subjectHash', select: '-_id -__v' })
+            .populate({ path: 'records.seasonHash', select: '-_id -__v' })
+            .populate({ path: 'records.lessonHash', select: '-_id -__v' })
+            .select('-_id -__v')
+            .lean();
 
         return data;
     }
