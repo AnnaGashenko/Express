@@ -12,6 +12,7 @@ const schema = new mongoose.Schema(
             type:     String,
             required: true,
             unique:   true,
+            maxlength: 30,
         },
         image:   String,
         seasons: [
@@ -19,7 +20,10 @@ const schema = new mongoose.Schema(
                 season: mongoose.SchemaTypes.ObjectId,
             },
         ],
-        description: String,
+        description: {
+            type:     String,
+            maxlength: 250,
+        },
     },
     {
         timestamps: {
@@ -30,6 +34,12 @@ const schema = new mongoose.Schema(
 );
 
 schema.index({ title: 'text', description: 'text' });
+
+schema.path('image').validate(function(value) {
+    const isValid = /^([/|.|\w|\s])*\.(?:jpg|gif|png)$/.test(value);
+
+    return isValid;
+}, 'path of image do not valid');
 
 // Collection
 export const subjects = mongoose.model('subjects', schema);

@@ -6,7 +6,7 @@ const schema = new mongoose.Schema(
         email: {
             type:     String,
             required: true,
-            unique:   true,
+            unique:   true
         },
         password: {
             type:     String,
@@ -20,6 +20,14 @@ const schema = new mongoose.Schema(
         },
     },
 );
+
+schema.path('emails').validate(function(value) {
+    const regex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,6}$/;
+
+    const isValid = value.every(({ email }) => regex.test(email));
+
+    return isValid;
+}, 'Do not correct email');
 
 // Collection
 export const users = mongoose.model('users', schema);

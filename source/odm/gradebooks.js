@@ -13,6 +13,8 @@ const schema = new mongoose.Schema(
             type:     Number,
             required: true,
             index:    true,
+            min: [2019, 'year can not be lower than 2019'],
+            max: [2099, 'year can not be grater than 2099'],
         },
         class: {
             type:     String,
@@ -38,6 +40,12 @@ const schema = new mongoose.Schema(
         },
     },
 );
+
+schema.path('image').validate(function(value) {
+    const isValid = /^([/|.|\w|\s])*\.(?:jpg|gif|png)$/.test(value);
+
+    return isValid;
+}, 'path of image do not valid');
 
 // Collection
 export const gradebooks = mongoose.model('gradebooks', schema);
