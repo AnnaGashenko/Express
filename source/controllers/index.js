@@ -4,3 +4,4 @@ export { Classes } from './classes';
 export { Gradebooks } from './gradebooks';
 export { Pupils } from './pupils';
 export { Subjects } from './subjects';
+export { Parents } from './parents';
