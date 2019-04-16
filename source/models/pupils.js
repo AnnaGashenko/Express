@@ -9,8 +9,12 @@ export class Pupils {
     }
 
     async find() {
-        const data = await pupils.find().lean();
-
+        const data = await pupils
+            .find()
+            .populate({ path: 'class', select: '-_id -__v' })
+            .populate({ path: 'parents.parent', select: '-_id -__v' })
+            .select('-_id -__v')
+            .lean();
         return data;
     }
 

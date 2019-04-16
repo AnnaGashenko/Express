@@ -32,7 +32,10 @@ export const parents = base.discriminator(
             },
             pupils: [
                 {
-                    pupil: mongoose.SchemaTypes.ObjectId,
+                    pupil: {
+                        type: mongoose.SchemaTypes.ObjectId,
+                        ref: 'pupils',
+                    },
                 },
             ]
         }

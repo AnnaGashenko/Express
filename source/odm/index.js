@@ -6,3 +6,4 @@ export { lessons } from './lessons';
 export { classes } from './classes';
 export { gradebooks } from './gradebooks';
 export { parents } from './parents';
+export { pupils } from './pupils';

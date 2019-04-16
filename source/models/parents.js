@@ -28,7 +28,7 @@ export class Parents {
     async findAllPupils() {
         const data = await parents
             .find()
-            .populate({ path: 'pupils.person', select: '-_id -__v' })
+            .populate({ path: 'pupils.pupil', select: '-_id -__v' })
             .select('-_id -__v')
             .lean();
 
@@ -49,7 +49,7 @@ export class Parents {
         const { id } = this.data;
         const data = await parents
             .findById(id)
-            .populate({ path: 'pupils.person', select: '-_id -__v' })
+            .populate({ path: 'pupils.pupil', select: '-_id -__v' })
             .select('-_id -__v')
             .lean();
 
